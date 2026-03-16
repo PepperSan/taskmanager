@@ -2,7 +2,9 @@ package com.peppermode.taskmanager.service;
 
 import com.peppermode.taskmanager.entity.Task;
 import com.peppermode.taskmanager.entity.TaskStatus;
+import com.peppermode.taskmanager.entity.User;
 import com.peppermode.taskmanager.repository.TaskRepository;
+import com.peppermode.taskmanager.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import java.util.List;
 public class TaskService {
 
     private final TaskRepository taskRepository;
+    private final UserRepository userRepository;
 
     public Task getById(Long id) {
         return taskRepository.findById(id)
@@ -24,6 +27,13 @@ public class TaskService {
     }
 
     public Task create(Task task) {
+        Long userId = task.getUser().getId();
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+
+        task.setUser(user);
+
         return taskRepository.save(task);
     }
 

@@ -1,0 +1,37 @@
+@host = http://localhost:8080
+
+### =========================
+### USER API
+### =========================
+
+### Получить всех пользователей
+GET {{host}}/api/users
+
+### Получить пользователя по ID
+GET {{host}}/api/users/1
+
+### Создать пользователя
+POST {{host}}/api/tasks
+Content-Type: application/json
+
+{
+  "title": "Learn Spring",
+  "description": "Finish controllers and services",
+  "deadline": "2026-03-30",
+  "status": "PENDING",
+  "user": {
+    "id": 1
+  }
+}
+
+
+
+### =========================
+### TASK API
+### =========================
+
+### Получить все задачи
+GET {{host}}/api/tasks
+
+### Получить задачу по ID
+GET {{host}}/api/tasks/1
