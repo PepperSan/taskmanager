@@ -44,7 +44,12 @@ public class TaskService {
         existingTask.setDescription(updatedTask.getDescription());
         existingTask.setDeadline(updatedTask.getDeadline());
         existingTask.setStatus(updatedTask.getStatus());
-        existingTask.setUser(updatedTask.getUser());
+
+        Long userId = updatedTask.getUser().getId();
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+
+        existingTask.setUser(user);
 
         return taskRepository.save(existingTask);
     }

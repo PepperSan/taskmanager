@@ -24,6 +24,37 @@ Content-Type: application/json
   }
 }
 
+### Обновить задачу
+PUT {{host}}/api/tasks/1
+Content-Type: application/json
+
+{
+  "title": "Complete homework updated",
+  "description": "Finish math, science and Spring practice",
+  "deadline": "2026-03-22",
+  "status": "DONE",
+  "user": {
+    "id": 1
+  }
+}
+
+### Удалить задачу
+DELETE {{host}}/api/tasks/2
+
+### Обновить пользователя
+PUT {{host}}/api/users/1
+Content-Type: application/json
+
+{
+  "username": "john_doe_updated",
+  "email": "john_updated@example.com",
+  "password": "newpassword123",
+  "role": "USER"
+}
+
+### Удалить пользователя
+DELETE {{host}}/api/users/2
+
 
 
 ### =========================
