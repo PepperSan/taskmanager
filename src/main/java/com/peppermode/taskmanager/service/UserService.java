@@ -1,6 +1,7 @@
 package com.peppermode.taskmanager.service;
 
 import com.peppermode.taskmanager.entity.User;
+import com.peppermode.taskmanager.exception.ResourceNotFoundException;
 import com.peppermode.taskmanager.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class UserService {
 
     public User getById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
     }
 
     public List<User> getAll() {

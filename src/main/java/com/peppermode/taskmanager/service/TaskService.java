@@ -3,6 +3,7 @@ package com.peppermode.taskmanager.service;
 import com.peppermode.taskmanager.entity.Task;
 import com.peppermode.taskmanager.entity.TaskStatus;
 import com.peppermode.taskmanager.entity.User;
+import com.peppermode.taskmanager.exception.ResourceNotFoundException;
 import com.peppermode.taskmanager.repository.TaskRepository;
 import com.peppermode.taskmanager.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class TaskService {
 
     public Task getById(Long id) {
         return taskRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Task not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Task not found with id: " + id));
     }
 
     public List<Task> getAll() {
@@ -30,7 +31,7 @@ public class TaskService {
         Long userId = task.getUser().getId();
 
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
 
         task.setUser(user);
 
@@ -47,7 +48,7 @@ public class TaskService {
 
         Long userId = updatedTask.getUser().getId();
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
 
         existingTask.setUser(user);
 

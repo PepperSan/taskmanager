@@ -1,16 +1,78 @@
 @host = http://localhost:8080
 
-### =========================
+### =========================================================
 ### USER API
-### =========================
+### =========================================================
 
 ### Получить всех пользователей
 GET {{host}}/api/users
 
+###
+
 ### Получить пользователя по ID
 GET {{host}}/api/users/1
 
+###
+
+### Получить несуществующего пользователя
+GET {{host}}/api/users/999
+
+###
+
 ### Создать пользователя
+POST {{host}}/api/users
+Content-Type: application/json
+
+{
+  "username": "alex",
+  "email": "alex@example.com",
+  "password": "alex123",
+  "role": "USER"
+}
+
+###
+
+### Обновить пользователя
+PUT {{host}}/api/users/1
+Content-Type: application/json
+
+{
+  "username": "john_doe_updated",
+  "email": "john_updated@example.com",
+  "password": "newpassword123",
+  "role": "USER"
+}
+
+###
+
+### Удалить пользователя по ID
+DELETE {{host}}/api/users/2
+
+###
+
+### Удалить несуществующего пользователя
+DELETE {{host}}/api/users/999
+
+### =========================================================
+### TASK API
+### =========================================================
+
+### Получить все задачи
+GET {{host}}/api/tasks
+
+###
+
+### Получить задачу по ID
+GET {{host}}/api/tasks/1
+
+###
+
+### Получить несуществующую задачу
+GET {{host}}/api/tasks/999
+
+###
+
+### Создать задачу
 POST {{host}}/api/tasks
 Content-Type: application/json
 
@@ -23,6 +85,8 @@ Content-Type: application/json
     "id": 1
   }
 }
+
+###
 
 ### Обновить задачу
 PUT {{host}}/api/tasks/1
@@ -38,31 +102,32 @@ Content-Type: application/json
   }
 }
 
-### Удалить задачу
+###
+
+### Удалить задачу по ID
 DELETE {{host}}/api/tasks/2
 
-### Обновить пользователя
-PUT {{host}}/api/users/1
-Content-Type: application/json
+###
 
-{
-  "username": "john_doe_updated",
-  "email": "john_updated@example.com",
-  "password": "newpassword123",
-  "role": "USER"
-}
+### Удалить несуществующую задачу
+DELETE {{host}}/api/tasks/999
 
-### Удалить пользователя
-DELETE {{host}}/api/users/2
+###
 
+### Получить задачи пользователя по userId
+GET {{host}}/api/tasks/user/1
 
+###
 
-### =========================
-### TASK API
-### =========================
+### Получить задачи по статусу PENDING
+GET {{host}}/api/tasks/status/PENDING
 
-### Получить все задачи
-GET {{host}}/api/tasks
+###
 
-### Получить задачу по ID
-GET {{host}}/api/tasks/1
+### Получить задачи по статусу IN_PROGRESS
+GET {{host}}/api/tasks/status/IN_PROGRESS
+
+###
+
+### Получить задачи по статусу DONE
+GET {{host}}/api/tasks/status/DONE
